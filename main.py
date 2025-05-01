@@ -15,7 +15,7 @@ logging.basicConfig(
         #logging.FileHandler("app.log")  # Logs to a file (optional)
     ]
 )
-ASANA_TOKEN = st.secrets("ASANA_TOKEN")
+ASANA_TOKEN = st.secrets["ASANA_TOKEN"]
 
 # Initialize session state for keeping track of file paths
 if "output_file" not in st.session_state:
