@@ -343,32 +343,32 @@ def create_asana_tasks_from_excel(send_to_asana=True):
             else:
                 logging.error(f"Failed to upload the Excel file. Response: {attach_response.json()}")
 
-        # if new_eans_needed:
-        #     # Create the main task
-        #     main_task_payload = {
-        #         "data": {
-        #             "name": "NEW F1's Needed",
-        #             "assignee": "1208716819375873",
-        #             "html_notes": "<body><b>Please can the following new F1's be created and added to the F1 Log <a href=\"https://docs.google.com/spreadsheets/d/1JesoDfHewylxsso0luFrY6KDclv3kvNjugnvMjRH2ak/edit#gid=0\" target=\"_blank\">here</a></b></body>",
-        #             "followers": ["greg.stephenson@monstergroupuk.co.uk, 1208716819375873,1208388789142367"],
-        #             "workspace": "17406368418784"
-        #         }
-        #     }
-        #     main_task_response = requests.post(url, json=main_task_payload, headers=headers)
-        #     main_task_data = main_task_response.json()
-        #     main_task_gid = main_task_data['data']['gid']
-        #
-        #     # Create subtasks
-        #     subtask_url = f"https://app.asana.com/api/1.0/tasks/{main_task_gid}/subtasks"
-        #     for task in new_eans_needed:
-        #         subtask_name = f"{task['Seller SKU']} - {task['Sku description']}"
-        #         subtask_payload = {
-        #             "data": {
-        #                 "name": subtask_name
-        #             }
-        #         }
-        #         subtask_response = requests.post(subtask_url, json=subtask_payload, headers=headers)
-        #         print(f"Added subtask: {subtask_name}. Response: {subtask_response.json()}")
+    if new_eans_needed:
+        # Create the main task
+        main_task_payload = {
+            "data": {
+                "name": "NEW F1's Needed",
+                "assignee": "1208716819375873",
+                "html_notes": "<body><b>Please can the following new F1's be created and added to the F1 Log <a href=\"https://docs.google.com/spreadsheets/d/1JesoDfHewylxsso0luFrY6KDclv3kvNjugnvMjRH2ak/edit#gid=0\" target=\"_blank\">here</a></b></body>",
+                "followers": ["greg.stephenson@monstergroupuk.co.uk, 1208716819375873,1208388789142367"],
+                "workspace": "17406368418784"
+            }
+        }
+        main_task_response = requests.post(url, json=main_task_payload, headers=headers)
+        main_task_data = main_task_response.json()
+        main_task_gid = main_task_data['data']['gid']
+
+        # Create subtasks
+        subtask_url = f"https://app.asana.com/api/1.0/tasks/{main_task_gid}/subtasks"
+        for task in new_eans_needed:
+            subtask_name = f"{task['Seller SKU']} - {task['Sku description']}"
+            subtask_payload = {
+                "data": {
+                    "name": subtask_name
+                }
+            }
+            subtask_response = requests.post(subtask_url, json=subtask_payload, headers=headers)
+            print(f"Added subtask: {subtask_name}. Response: {subtask_response.json()}")
 
 # Initialize an empty set to store unique seller-skus
 unique_seller_skus = set()
