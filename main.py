@@ -180,7 +180,7 @@ def update_excel_with_barcodes(uploaded_barcodes):
         logging.info("Updating filtered_ratings_with_desc_and_F1_to_use.xlsx with Barcodes.")
 
         input_file = st.session_state.output_file
-        df_barcodes = pd.read_csv(uploaded_barcodes, header=3)
+        df_barcodes = pd.read_csv(uploaded_barcodes)
 
         xls = pd.ExcelFile(input_file)
         sheet_names = xls.sheet_names
